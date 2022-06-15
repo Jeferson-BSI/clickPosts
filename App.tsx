@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
@@ -32,7 +33,7 @@ export default function App() {
     <View
       style={{
       flex: 1,
-      backgroundColor: theme.colors.white
+      backgroundColor: theme.colors.background
     }}
     >
       <StatusBar

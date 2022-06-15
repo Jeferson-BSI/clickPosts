@@ -3,13 +3,14 @@ import { theme } from '../../theme';
 
 import { 
   Container, 
-  HeaderPost, 
+  HeaderCard, 
   TextName, 
   Content, 
   Title, 
   Body, 
   Time,
   FooterPost,
+  UserContainer,
   Clickable
 } from './styles';
 
@@ -21,13 +22,15 @@ const post =   {
   }
 
 
-export function Post() {
+export function PostCard() {
   return(
     <Container>
-      <HeaderPost>
-        <TextName>Jeferson </TextName>
+      <HeaderCard>
+        <UserContainer>
+          <TextName>Jeferson</TextName>
+        </UserContainer>
         <Time>• há 16m</Time>
-      </HeaderPost>
+      </HeaderCard>
 
       <Content>
         <Title>{post.title}</Title>

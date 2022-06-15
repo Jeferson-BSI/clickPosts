@@ -4,45 +4,50 @@ import { theme } from "../../theme";
 export const Container = styled.View`
   width: 100%;
   padding: 10px 8px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  border-radius: 10px;
 
-  border-bottom-width: 1px;
-  border-color: #E3E3E3;
+  background: ${theme.colors.white};
 `;
 
 
-export const HeaderPost = styled.View`
+export const HeaderCard = styled.View`
   flex-direction: row;
   align-items: center;
-  width: 23.6%;
+  width: 100%;
   margin-bottom: 3px;
+`;
 
-  background:rgba(221, 221, 221, 0.8);
-  padding: 2px 8px;
-  border-radius: 6px;
+export const UserContainer = styled.TouchableOpacity`
+  align-items: center;
+  padding: 1px 10px;
+  background: rgba(128, 128, 128, 0.1);
+
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: ${theme.colors.border};
 `;
 
 export const TextName = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
   font-family: ${theme.fonts.bold};
-  font-style: normal;
-  color: ${theme.colors.black};
+  color: ${theme.colors.textTitle};
 `;
 
 export const Time = styled.Text`
   font-size: 12px;
   font-family: ${theme.fonts.regular};
   color: ${theme.colors.text_secondary};
-  margin-left: 10px;
+  margin-left: 5px;
 `;
 
 
 export const Content = styled.View`
   margin-left: 16px;
-  margin-bottom: 8px;
   padding: 5px 5px;
 
-
+  border-bottom-width: 1px;
+  border-color: ${theme.colors.border};
 `;
 
 export const Title = styled.Text`
@@ -55,26 +60,25 @@ export const Title = styled.Text`
 export const Body = styled.Text`
   font-size: 16px;
   font-family: ${theme.fonts.regular};
-  font-style: normal;
   text-align: justify;
   line-height: 17px;
   letter-spacing: -0.2px;
   color: ${theme.colors.text_primary};
+  margin-bottom: 8px;
 `;
 
 
-export const Clickable = styled.TouchableOpacity``;
+
 
 export const FooterPost = styled.View`
-  border-width: 1px;
-  border-color: #E3E3E3;
-  border-radius: 8px;
-  width: 50%;
-  align-self: center;
-
   flex-direction:row;
   align-items: center;
-  justify-content: space-around;
-
-  padding: 10px;
+  justify-content: space-between;
+  align-self: center;
+  
+  width: 35%;
+  margin-top: 10px;
+  border-radius: 8px;
 `;
+
+export const Clickable = styled.TouchableOpacity``;

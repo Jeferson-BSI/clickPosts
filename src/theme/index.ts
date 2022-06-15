@@ -1,6 +1,8 @@
 export const theme = {
   colors: {
-    background: '#ffffffca',
+    // background: '#ffffffca',
+    background: '#dddddd',
+
     blue: '#5429cc',
     blueLight: '#6933ff',
     white: '#FFFFFF',
@@ -11,7 +13,6 @@ export const theme = {
 
 
     brand: '#8257E5',
-    
     surface_primary: '#18181B',
     surface_secondary: '#27272A',
 
@@ -19,7 +20,8 @@ export const theme = {
     text_secondary: '#828282;',
     text_on_brand_color: '#FFFFFF',
 
-    stroke: '#52525B'
+    stroke: '#52525B',
+    border: '#E3E3E3'
   },
 
   
