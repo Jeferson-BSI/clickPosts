@@ -1,14 +1,32 @@
 export const theme = {
   colors: {
     background: '#ffffffca',
+    blue: '#5429cc',
+    blueLight: '#6933ff',
+    white: '#FFFFFF',
+    black: '#000000',
+
     textTitle: '#363f5f',
     textBody: '#969cb3',
-    white: '#FFFFFF'
+
+
+    brand: '#8257E5',
+    
+    surface_primary: '#18181B',
+    surface_secondary: '#27272A',
+
+    text_primary: '#333333;',
+    text_secondary: '#828282;',
+    text_on_brand_color: '#FFFFFF',
+
+    stroke: '#52525B'
   },
 
+  
+  
   fonts: {
-    regular: 'Poppins_400Regular',
-    medium: 'Poppins_500Medium',
-    bold: 'Poppins_600SemiBold'
+    regular: 'Roboto_400Regular',
+    medium: 'Roboto_500Medium',
+    bold: 'Roboto_700Bold',
   }
 }

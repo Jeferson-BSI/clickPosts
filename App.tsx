@@ -4,10 +4,11 @@ import * as SplashScreen from 'expo-splash-screen';
 
 import { 
   useFonts,
-  Poppins_400Regular,
-  Poppins_500Medium, 
-  Poppins_600SemiBold 
-} from '@expo-google-fonts/poppins';
+  Roboto_400Regular,
+  Roboto_500Medium,
+  Roboto_700Bold
+
+} from '@expo-google-fonts/roboto';
 
 import { Home } from './src/pages/Home'; 
 import { theme } from './src/theme';
@@ -16,9 +17,9 @@ export default function App() {
 
     SplashScreen.preventAutoHideAsync();
     let [fontsLoaded] = useFonts({  
-      Poppins_400Regular,
-      Poppins_500Medium, 
-      Poppins_600SemiBold 
+      Roboto_400Regular,
+      Roboto_500Medium,
+      Roboto_700Bold 
     });
 
     if(!fontsLoaded) {
@@ -31,7 +32,7 @@ export default function App() {
     <View
       style={{
       flex: 1,
-      backgroundColor: theme.colors.background
+      backgroundColor: theme.colors.white
     }}
     >
       <StatusBar
