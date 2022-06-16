@@ -11,7 +11,8 @@ import {
   Time,
   FooterPost,
   UserContainer,
-  Clickable
+  Clickable,
+  Line
 } from './styles';
 
 
@@ -42,6 +43,7 @@ export function PostCard({ post }: PostCardProps) {
         <Body>{post.body}</Body>
       </Content>
 
+      <Line />
       <FooterPost>
         <Clickable>
           <NotePencil 

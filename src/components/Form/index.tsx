@@ -26,7 +26,6 @@ type PostInputsType = {
   body: string;
 }
 
-
 export function Form({ onModalClose }: FormProps) {
   const [userName, setUserName] = useState<string>('');
   const [title, setTitle] = useState<string>('');
@@ -51,7 +50,7 @@ export function Form({ onModalClose }: FormProps) {
 
     try {
       await createPost(data);
-      onModalClose();
+      // onModalClose();
 
       setUserName('');
       setTitle('');
@@ -113,7 +112,7 @@ export function Form({ onModalClose }: FormProps) {
 
       <Footer>
         <Button 
-          isLoading={false}
+          isLoading={isSendingPost}
           onPress={handleCreateNewPost}
         />
       </Footer>

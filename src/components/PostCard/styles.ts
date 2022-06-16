@@ -3,6 +3,7 @@ import { theme } from "../../theme";
 
 export const Container = styled.View`
   width: 100%;
+  /* min-width: 380px; */
   padding: 10px 8px;
   margin-bottom: 8px;
   border-radius: 10px;
@@ -42,10 +43,16 @@ export const Time = styled.Text`
 
 
 export const Content = styled.View`
+  width: 100%;
   margin-left: 16px;
   padding: 5px 5px;
 
-  border-bottom-width: 1px;
+  /* border-bottom-width: 1px;
+  border-color: ${theme.colors.border}; */
+`;
+export const Line = styled.View`
+  width: 100%;
+  border-width: 1px;
   border-color: ${theme.colors.border};
 `;
 
