@@ -1,5 +1,4 @@
-import { differenceInDays, parseISO, differenceInHours, formatDistanceToNow
-, format, formatDistance, subDays, formatISO, formatDistanceToNowStrict, compareAsc } from 'date-fns';
+import { formatISO, formatDistanceToNowStrict, compareAsc } from 'date-fns';
 
 export function compareDateToDateNow(date: Date | string): string {
   const difference = formatDistanceToNowStrict(
