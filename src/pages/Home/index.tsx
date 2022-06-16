@@ -5,57 +5,21 @@ import { Header } from '../../components/Header';
 
 import { Container, ScrollList } from './styles';
 import NewPost from '../../components/NewPost';
+import { PostType, usePosts } from '../../hooks/usePosts';
 
-
-const post =   [
-  {
-    'userName': 'Jeferson',
-    "userId": 1,
-    "id": 2,
-    "title": "This's a first post",
-    "body": "This is a post. It can be long, or short. Depends on what you have to say.  It can be long, or short. Depends on what you have to say."
-  },
-  {
-    'userName': 'Jeferson',
-    "userId": 1,
-    "id": 2,
-    "title": "This's a first post",
-    "body": "This is a post. It can be long, or short. Depends on what you have to say.  It can be long, or short. Depends on what you have to say."
-  },
-  {
-    'userName': 'Jeferson',
-    "userId": 1,
-    "id": 2,
-    "title": "This's a first post",
-    "body": "This is a post. It can be long, or short. Depends on what you have to say.  It can be long, or short. Depends on what you have to say."
-  },
-    {
-    'userName': 'Jeferson',
-    "userId": 1,
-    "id": 2,
-    "title": "This's a first post",
-    "body": "This is a post. It can be long, or short. Depends on what you have to say.  It can be long, or short. Depends on what you have to say."
-  },
-    {
-    'userName': 'Jeferson',
-    "userId": 1,
-    "id": 2,
-    "title": "This's a first post",
-    "body": "This is a post. It can be long, or short. Depends on what you have to say.  It can be long, or short. Depends on what you have to say."
-  }
-
-]
 
 export function Home() {
+  const { posts } = usePosts();
+  
   return(
     <Container>
       <Header />
       <ScrollList 
-        data={post}
+        data={posts}
         showsVerticalScrollIndicator={false}
         keyExtractor={(_, key) => String(key)}
         renderItem={({item, index}) => (
-          <PostCard key={String(index)}/>
+          <PostCard key={String(index)} post={item as PostType}/>
         )}
       />
     <NewPost />

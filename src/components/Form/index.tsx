@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X } from 'phosphor-react-native';
 
+import { usePosts } from '../../hooks/usePosts';
 import { theme } from '../../theme';
 import { Button } from '../Button'
 
@@ -19,11 +20,50 @@ type FormProps = {
   onModalClose: () => void;
 }
 
+type PostInputsType = {
+  userName: string;
+  title: string;
+  body: string;
+}
+
 
 export function Form({ onModalClose }: FormProps) {
-  const [name, setName] = useState<string>('');
+  const [userName, setUserName] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
+
+  const [isSendingPost, setIsSendingPost] = useState(false);
+
+  const { createPost } = usePosts();
+
+  async function handleCreateNewPost(){
+    if(isSendingPost || !userName ||!title || !body){
+      return;
+    }
+
+    setIsSendingPost(true);
+
+    const data: PostInputsType = {
+      userName,
+      title,
+      body
+    }
+
+    try {
+      await createPost(data);
+      onModalClose();
+
+      setUserName('');
+      setTitle('');
+      setBody('');
+      
+    } catch (error) {
+      setIsSendingPost(false);
+      console.log(error);
+    }
+
+    setIsSendingPost(false);
+  }
 
   return (
     <Container>
@@ -45,8 +85,8 @@ export function Form({ onModalClose }: FormProps) {
           placeholder="UserName"
           placeholderTextColor={theme.colors.text_secondary}
           selectionColor={theme.colors.brand}
-          value={name}
-          onChangeText={(value) => setName(value)}
+          value={userName}
+          onChangeText={(value) => setUserName(value)}
         />
 
           <TextInput 
@@ -74,7 +114,7 @@ export function Form({ onModalClose }: FormProps) {
       <Footer>
         <Button 
           isLoading={false}
-          onPress={()=>{}}
+          onPress={handleCreateNewPost}
         />
       </Footer>
     </Container>

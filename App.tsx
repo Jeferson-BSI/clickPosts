@@ -13,6 +13,7 @@ import {
 
 import { Home } from './src/pages/Home'; 
 import { theme } from './src/theme';
+import { PostProvider } from './src/hooks/usePosts';
 
 
 export default function App() {
@@ -37,13 +38,15 @@ export default function App() {
       backgroundColor: theme.colors.background
     }}
     >
+    <PostProvider>
       <StatusBar
         style="light"
         backgroundColor="transparent"
         translucent
 
       />
-      <Home />
+        <Home />
+      </PostProvider>
     </GestureHandlerRootView>
   )
 };

@@ -14,15 +14,20 @@ import {
   Clickable
 } from './styles';
 
-const post =   {
-    "userId": 1,
-    "id": 2,
-    "title": "This's a first post",
-    "body": "This is a post. It can be long, or short. Depends on what you have to say.  It can be long, or short. Depends on what you have to say."
-  }
+
+export type PostType = {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
 
 
-export function PostCard() {
+type PostCardProps = {
+  post: PostType;
+}
+
+export function PostCard({ post }: PostCardProps) {
   return(
     <Container>
       <HeaderCard>
