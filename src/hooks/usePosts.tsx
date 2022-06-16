@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { api } from '../services/api';
+import { dateNow } from '../utils/dateProvider';
 
 const LocalPost =   [
   {
@@ -46,6 +47,7 @@ export type PostType = {
   id: number;
   title: string;
   body: string;
+  createdAt?: string;
 }
 
 type CreateContextType = {
@@ -88,11 +90,12 @@ export function PostProvider({ children }: PostsProviderProps) {
     const post = {
       id,
       userId,
-      ...postInputs
+      ...postInputs,
+      createdAt: dateNow()
     }
 
     try {
-      setLocalPost([...localPosts, post]);
+      setLocalPost([...localPosts, post]);   
 
     } catch (error) {
       console.log(error);
@@ -101,7 +104,7 @@ export function PostProvider({ children }: PostsProviderProps) {
   };
 
   return (
-    <PostsContext.Provider value={{posts: localPosts, createPost}}>
+    <PostsContext.Provider value={{posts, createPost}}>
       { children }
     </PostsContext.Provider>
   )

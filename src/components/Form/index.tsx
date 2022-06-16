@@ -69,7 +69,7 @@ export function Form({ onModalClose }: FormProps) {
         <HeaderFrom 
           onPress={onModalClose}
         >
-            <X weight="bold"  />
+          <X weight="bold"  />
         </HeaderFrom>
         <TitleContainer>
           <Title>
@@ -88,7 +88,7 @@ export function Form({ onModalClose }: FormProps) {
           onChangeText={(value) => setUserName(value)}
         />
 
-          <TextInput 
+        <TextInput 
           autoCorrect={false}
           placeholder="Title"
           placeholderTextColor={theme.colors.text_secondary}
@@ -106,7 +106,6 @@ export function Form({ onModalClose }: FormProps) {
 
           value={body}
           onChangeText={(value) => setBody(value)}
-
         />
       </InputContainer>
 

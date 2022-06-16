@@ -1,4 +1,4 @@
-import 'react-native-gesture-handler';
+  import 'react-native-gesture-handler';
 import React from 'react';
 import { PostCard } from '../../components/PostCard';
 import { Header } from '../../components/Header';
@@ -22,7 +22,7 @@ export function Home() {
           <PostCard key={String(index)} post={item as PostType}/>
         )}
       />
-    <NewPost />
+      <NewPost />
     </Container>
   )
 };
