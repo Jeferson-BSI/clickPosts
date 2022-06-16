@@ -4,10 +4,11 @@ export const Container = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
-
+  position: relative;
 `;
 
 export const ScrollList = styled.FlatList`
   flex: 1;
   padding: 16px 0;
 `;
+

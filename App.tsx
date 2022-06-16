@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { 
   useFonts,
@@ -13,6 +13,7 @@ import {
 
 import { Home } from './src/pages/Home'; 
 import { theme } from './src/theme';
+
 
 export default function App() {
 
@@ -30,7 +31,7 @@ export default function App() {
     SplashScreen.hideAsync();
 
   return (
-    <View
+    <GestureHandlerRootView
       style={{
       flex: 1,
       backgroundColor: theme.colors.background
@@ -40,8 +41,9 @@ export default function App() {
         style="light"
         backgroundColor="transparent"
         translucent
+
       />
       <Home />
-    </View>
+    </GestureHandlerRootView>
   )
 };

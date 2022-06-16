@@ -1,5 +1,11 @@
+import 'react-native-gesture-handler';
+import React from 'react';
 import { PostCard } from '../../components/PostCard';
 import { Header } from '../../components/Header';
+
+import { Container, ScrollList } from './styles';
+import NewPost from '../../components/NewPost';
+
 
 const post =   [
   {
@@ -40,9 +46,6 @@ const post =   [
 
 ]
 
-
-import { Container, ScrollList } from './styles';
-
 export function Home() {
   return(
     <Container>
@@ -54,9 +57,8 @@ export function Home() {
         renderItem={({item, index}) => (
           <PostCard key={String(index)}/>
         )}
-
       />
-
+    <NewPost />
     </Container>
   )
 };

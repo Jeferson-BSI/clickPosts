@@ -15,13 +15,12 @@ export const HeaderCard = styled.View`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  margin-bottom: 3px;
 `;
 
 export const UserContainer = styled.TouchableOpacity`
   align-items: center;
-  padding: 1px 10px;
-  background: rgba(128, 128, 128, 0.1);
+  padding: 0px 15px;
+  background: rgba(128, 128, 128, 0.05);
 
   border-radius: 5px;
   border-width: 1px;
@@ -54,7 +53,7 @@ export const Title = styled.Text`
   font-size: 15px;
   font-family: ${theme.fonts.medium};
   color: ${theme.colors.text_secondary};
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 `;
 
 export const Body = styled.Text`
@@ -66,8 +65,6 @@ export const Body = styled.Text`
   color: ${theme.colors.text_primary};
   margin-bottom: 8px;
 `;
-
-
 
 
 export const FooterPost = styled.View`

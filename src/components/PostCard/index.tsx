@@ -40,16 +40,16 @@ export function PostCard() {
       <FooterPost>
         <Clickable>
           <NotePencil 
-            weight='bold'
-            size={25}
+            weight='thin'
+            size={24}
             color={theme.colors.blueLight}
           />
         </Clickable>
 
         <Clickable>
           <Trash
-            weight='bold'
-            size={25}
+            weight='thin'
+            size={24}
             color={theme.colors.blueLight}
           />
         </Clickable>
