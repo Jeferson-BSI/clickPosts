@@ -1,8 +1,9 @@
 import { useRef } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
+import { BottomSheetComponent } from '../BottomSheetComponent';
 
-import { Plus } from 'phosphor-react-native';
 import { Form } from '../Form';
+import { Plus } from 'phosphor-react-native';
 import { theme } from '../../theme';
 
 import { 
@@ -38,7 +39,12 @@ export default function NewPost() {
         />
       </Container>
 
-      <BottomSheetContainer
+      <BottomSheetComponent
+        bottomSheetRef={bottomSheetRef}
+      >
+        <Form onModalClose={handleClose}/>
+      </BottomSheetComponent>
+      {/* <BottomSheetContainer
         ref={bottomSheetRef}
         snapPoints={[1, '60%']} 
         backgroundStyle={modal}
@@ -46,7 +52,7 @@ export default function NewPost() {
         enableContentPanningGesture
       >
         <Form onModalClose={handleClose}/>
-      </BottomSheetContainer>
+      </BottomSheetContainer> */}
     </>
   );
 }

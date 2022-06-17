@@ -49,7 +49,7 @@ export function ConfirmationModal({
             onPress={onClickCancel}
           >
             <TextButton>
-              Cancelar
+              Cancel
             </TextButton>
           </Clickable>
 

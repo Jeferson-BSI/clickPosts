@@ -1,11 +1,7 @@
 import { NotePencil, Trash } from 'phosphor-react-native';
-import React, { useCallback } from 'react';
-import { useEffect, useState } from 'react';
-import { usePosts } from '../../hooks/usePosts';
-import { UserType, useUsers } from '../../hooks/UseUsers';
-import { theme } from '../../theme';
 import { compareDateToDateNow } from '../../utils/dateProvider';
 
+import { theme } from '../../theme';
 import { 
   Container, 
   HeaderCard, 
@@ -33,16 +29,11 @@ export type PostType = {
 type PostCardProps = {
   post: PostType;
   onDeletePost: (post: PostType) => void;
+  onEditPost: (post: PostType) => void;
   onOpenModal: () => void;
-
 }
 
 export function PostCard({ post, onDeletePost, onOpenModal }: PostCardProps) {
-  const { deletePost } = usePosts();
-
-  function handlerDeletePost(){
-    deletePost(post.id)
-  }
 
   function handleDate(date: string): string {
     return compareDateToDateNow(date);
@@ -69,7 +60,12 @@ export function PostCard({ post, onDeletePost, onOpenModal }: PostCardProps) {
 
       <Line />
       <FooterPost>
-        <Clickable>
+        <Clickable
+          onPress={()=>{
+            onDeletePost(post)
+            onOpenModal();
+          }}
+        >
           <NotePencil 
             weight='thin'
             size={24}

@@ -36,7 +36,11 @@ export function Home() {
   }
 
   function getPostToDelete(post:PostType) {
-      setPostoDelete(post)
+      setPostoDelete(post);
+  }
+
+  function getPostToEdit(post:PostType) {
+    setPostoDelete(post);
   }
 
   function handleDeletePost() {
@@ -45,11 +49,11 @@ export function Home() {
   }
 
   function handleOpenModal(){
-    setModalIsOpen(true)
+    setModalIsOpen(true);
   }
 
    function handleCloseModal(){
-    setModalIsOpen(false)
+    setModalIsOpen(false);
   }
 
   useEffect(() => {
@@ -77,6 +81,7 @@ export function Home() {
               key={String(index)} 
               post={item as PostType}
               onDeletePost={getPostToDelete}
+              onEditPost={getPostToEdit}
               onOpenModal={handleOpenModal}
             />
           )}
@@ -84,6 +89,7 @@ export function Home() {
       }
 
       <NewPost />
+
       <ConfirmationModal 
         title='Are you sure?'
         body='Are you sure you want to delete this post?'
@@ -91,6 +97,7 @@ export function Home() {
         onClickOK={handleDeletePost}
         isVisible={modalIsOpen}
       />
+      <EditPost />
     </Container>
   )
 };
