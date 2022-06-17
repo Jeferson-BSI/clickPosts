@@ -33,11 +33,18 @@ type PostCardProps = {
   onOpenModal: () => void;
 }
 
-export function PostCard({ post, onDeletePost, onOpenModal }: PostCardProps) {
+export function PostCard({ 
+  post, 
+  onDeletePost, 
+  onEditPost, 
+  onOpenModal 
+}: PostCardProps) {
 
   function handleDate(date: string): string {
+    console.log(post);
     return compareDateToDateNow(date);
   }
+
 
   return(
     <Container>
@@ -62,8 +69,7 @@ export function PostCard({ post, onDeletePost, onOpenModal }: PostCardProps) {
       <FooterPost>
         <Clickable
           onPress={()=>{
-            onDeletePost(post)
-            onOpenModal();
+            onEditPost(post)
           }}
         >
           <NotePencil 

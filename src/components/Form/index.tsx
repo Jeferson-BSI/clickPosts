@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { X } from 'phosphor-react-native';
 
-import { usePosts } from '../../hooks/usePosts';
+import { PostType, usePosts } from '../../hooks/usePosts';
 import { theme } from '../../theme';
 import { Button } from '../Button'
 
@@ -18,22 +18,23 @@ import {
 
 type FormProps = {
   onModalClose: () => void;
+  post?: PostType;
 }
 
 type PostInputsType = {
-  username: string;
+  username?: string;
   title: string;
   body: string;
 }
 
-export function Form({ onModalClose }: FormProps) {
+export function Form({ onModalClose, post }: FormProps) {
   const [username, setUsername] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
 
   const [isSendingPost, setIsSendingPost] = useState(false);
 
-  const { createPost } = usePosts();
+  const { createPost, editPost } = usePosts();
 
   async function handleCreateNewPost(){
     if(isSendingPost || !username ||!title || !body){
@@ -64,6 +65,33 @@ export function Form({ onModalClose }: FormProps) {
     setIsSendingPost(false);
   }
 
+  async function handleEditPost() {
+    if(isSendingPost ||!title || !body || !post){
+      return;
+    }
+    setIsSendingPost(true);
+
+    const data: PostInputsType = {
+      username: post.username,
+      title,
+      body
+    }
+
+    try {
+      if(post) await editPost(data, post);
+
+      setTitle('');
+      setBody('');
+      onModalClose();
+      
+    } catch (error) {
+      setIsSendingPost(false);
+      console.log(error);
+    }
+
+    setIsSendingPost(false);
+  }
+
   return (
     <Container>
         <HeaderFrom 
@@ -73,12 +101,13 @@ export function Form({ onModalClose }: FormProps) {
         </HeaderFrom>
         <TitleContainer>
           <Title>
-            Create a new Post
+            {post?post.username:'Create a new Post'}
           </Title>
         </TitleContainer>
 
       <InputContainer>
-        <TextInput 
+        {
+          !post && <TextInput 
           autoCorrect={false}
           spellCheck={false}
           placeholder="UserName"
@@ -87,6 +116,8 @@ export function Form({ onModalClose }: FormProps) {
           value={username}
           onChangeText={(value) => setUsername(value)}
         />
+        }
+       
 
         <TextInput 
           autoCorrect={false}
@@ -111,8 +142,9 @@ export function Form({ onModalClose }: FormProps) {
 
       <Footer>
         <Button 
+          title={post? 'Editar': 'Enviar'}
           isLoading={isSendingPost}
-          onPress={handleCreateNewPost}
+          onPress={post? handleEditPost :handleCreateNewPost}
         />
       </Footer>
     </Container>

@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
-import { PostType, usePosts } from '../../hooks/usePosts';
+import { useEffect, useRef, useState } from 'react';
+import BottomSheet from '@gorhom/bottom-sheet';
 import { useUsers } from '../../hooks/UseUsers';
+import { PostType, usePosts } from '../../hooks/usePosts';
 
 
 import { PostCard } from '../../components/PostCard';
 import { Header } from '../../components/Header';
 import NewPost from '../../components/NewPost';
+import EditPost from '../../components/EditPost';
+
 import { ConfirmationModal } from '../../components/ConfirmationModal';
 
 import { theme } from '../../theme';
@@ -16,19 +19,22 @@ export function Home() {
   const { users } = useUsers();
 
   const [ postsWithUsername, setPostsWithUsername ] = useState<PostType[]>([]);
-  const [postToDelete, setPostoDelete] = useState<PostType>({} as PostType);
+  const [selectedPost, setSelectedPost] = useState<PostType>({} as PostType);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  const bottomSheetRef = useRef<BottomSheet>(null);
 
-  function handlePostsName() {
+  function handlePostsName() {    
     const postsWithUsername =  posts.map((post) => {
       const user = users.find(user => user.id === post.userId)
-      if(!user) {
-        // console.log(users);
+
+      if(post.username || !user) {        
+        return post;
       }
+
       return {
         ...post,
-        username: user?.username,
+        username: user.username,
       };
     });
 
@@ -36,15 +42,16 @@ export function Home() {
   }
 
   function getPostToDelete(post:PostType) {
-      setPostoDelete(post);
+      setSelectedPost(post);
   }
 
   function getPostToEdit(post:PostType) {
-    setPostoDelete(post);
+    setSelectedPost(post);
+    bottomSheetRef.current?.expand();
   }
 
   function handleDeletePost() {
-    deletePost(postToDelete.id);
+    deletePost(selectedPost.id);
     handleCloseModal();
   }
 
@@ -54,6 +61,10 @@ export function Home() {
 
    function handleCloseModal(){
     setModalIsOpen(false);
+  }
+
+   function handleClose() {
+    bottomSheetRef.current?.close()
   }
 
   useEffect(() => {
@@ -66,29 +77,33 @@ export function Home() {
     <Container>
       <Header />
       { 
-        isLoading ?
+        isLoading?
           <IsLoading 
-          size={50}
-          color={theme.colors.brand}
-        />
+            size={50}
+            color={theme.colors.brand}
+          />
         :
-        <ScrollList 
-          data={postsWithUsername}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(_, key) => String(key)}
-          renderItem={({item, index}) => (
-            <PostCard 
-              key={String(index)} 
-              post={item as PostType}
-              onDeletePost={getPostToDelete}
-              onEditPost={getPostToEdit}
-              onOpenModal={handleOpenModal}
-            />
-          )}
-        />
+          <ScrollList 
+            data={postsWithUsername}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(_, key) => String(key)}
+            renderItem={({item, index}) => (
+              
+              <PostCard 
+                key={String(index)} 
+                post={item as PostType}
+                onDeletePost={getPostToDelete}
+                onEditPost={getPostToEdit}
+                onOpenModal={handleOpenModal}
+              />
+            )}
+          />
       }
 
       <NewPost />
+      <EditPost 
+        bottomSheetRef={bottomSheetRef} 
+        onHandleClose={handleClose} post={selectedPost}/>
 
       <ConfirmationModal 
         title='Are you sure?'
@@ -97,7 +112,6 @@ export function Home() {
         onClickOK={handleDeletePost}
         isVisible={modalIsOpen}
       />
-      <EditPost />
     </Container>
   )
 };

@@ -5,9 +5,10 @@ import { Container, TextButton } from './styles';
 
 interface ButtonProps extends TouchableOpacityProps{
   isLoading: boolean;
+  title: string;
 }
 
-export function Button({isLoading, onPress}: ButtonProps) {
+export function Button({isLoading, title, onPress}: ButtonProps) {
   return (
     <Container
       onPress={onPress}
@@ -19,7 +20,7 @@ export function Button({isLoading, onPress}: ButtonProps) {
           />
         :
           <TextButton>
-            Enviar
+            {title}
           </TextButton>
       }
     </Container>
