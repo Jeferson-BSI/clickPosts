@@ -1,5 +1,7 @@
 import { NotePencil, Trash } from 'phosphor-react-native';
+import React, { useCallback } from 'react';
 import { useEffect, useState } from 'react';
+import { usePosts } from '../../hooks/usePosts';
 import { UserType, useUsers } from '../../hooks/UseUsers';
 import { theme } from '../../theme';
 import { compareDateToDateNow } from '../../utils/dateProvider';
@@ -20,7 +22,7 @@ import {
 
 
 export type PostType = {
-  userName: string;
+  username?: string;
   userId: number;
   id: number;
   title: string;
@@ -30,32 +32,27 @@ export type PostType = {
 
 type PostCardProps = {
   post: PostType;
+  onDeletePost: (post: PostType) => void;
+  onOpenModal: () => void;
 
 }
 
-export function PostCard({ post }: PostCardProps) {
-  const [user, setUser] = useState<UserType>({} as UserType);
-  const { getUser } = useUsers()
-  
-  function handleDate(date: string): string {
-    return compareDateToDateNow(date);
-  } 
-  
-  async function handleUser() {
-    const userRequest = await getUser(post.userId);
+export function PostCard({ post, onDeletePost, onOpenModal }: PostCardProps) {
+  const { deletePost } = usePosts();
 
-    setUser(userRequest);
+  function handlerDeletePost(){
+    deletePost(post.id)
   }
 
-  useEffect(() => {
-    handleUser();
-  }, []);
+  function handleDate(date: string): string {
+    return compareDateToDateNow(date);
+  }
 
   return(
     <Container>
       <HeaderCard>
         <UserContainer>
-          <TextName>{user?.name}</TextName>
+          <TextName>{ post.username }</TextName>
         </UserContainer>
         <Time>• há {
           post.createdAt?
@@ -80,7 +77,12 @@ export function PostCard({ post }: PostCardProps) {
           />
         </Clickable>
 
-        <Clickable>
+        <Clickable
+          onPress={()=>{
+            onDeletePost(post)
+            onOpenModal();
+          }}
+        >
           <Trash
             weight='thin'
             size={24}

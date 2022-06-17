@@ -21,13 +21,13 @@ type FormProps = {
 }
 
 type PostInputsType = {
-  userName: string;
+  username: string;
   title: string;
   body: string;
 }
 
 export function Form({ onModalClose }: FormProps) {
-  const [userName, setUserName] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
 
@@ -36,14 +36,14 @@ export function Form({ onModalClose }: FormProps) {
   const { createPost } = usePosts();
 
   async function handleCreateNewPost(){
-    if(isSendingPost || !userName ||!title || !body){
+    if(isSendingPost || !username ||!title || !body){
       return;
     }
 
     setIsSendingPost(true);
 
     const data: PostInputsType = {
-      userName,
+      username,
       title,
       body
     }
@@ -52,7 +52,7 @@ export function Form({ onModalClose }: FormProps) {
       await createPost(data);
       // onModalClose();
 
-      setUserName('');
+      setUsername('');
       setTitle('');
       setBody('');
       
@@ -84,8 +84,8 @@ export function Form({ onModalClose }: FormProps) {
           placeholder="UserName"
           placeholderTextColor={theme.colors.text_secondary}
           selectionColor={theme.colors.brand}
-          value={userName}
-          onChangeText={(value) => setUserName(value)}
+          value={username}
+          onChangeText={(value) => setUsername(value)}
         />
 
         <TextInput 

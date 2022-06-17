@@ -43,12 +43,9 @@ export const Time = styled.Text`
 
 
 export const Content = styled.View`
-  width: 100%;
+  /* flex: 1; */
   margin-left: 16px;
   padding: 5px 5px;
-
-  /* border-bottom-width: 1px;
-  border-color: ${theme.colors.border}; */
 `;
 export const Line = styled.View`
   width: 100%;

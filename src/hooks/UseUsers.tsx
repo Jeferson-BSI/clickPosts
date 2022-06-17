@@ -22,6 +22,7 @@ type CreateContextType = {
   users: UserType[],
   createUser: (user: UserInputType) => Promise<void>;
   getUser: (id: number) => Promise<UserType>;
+  findUser: (id: number) => UserType | void;
 }
 
 type UsersProviderProps = {
@@ -34,9 +35,33 @@ const UsersContext = createContext<CreateContextType>(
 );
 
 
+const userLocal = {
+    "id": 1,
+    "name": "Jeferson Lopes Coutinho",
+    "username": "Jeferson Lopes",
+    "email": "Jeferson@april.biz",
+    "address": {
+      "street": "Kulas Light",
+      "suite": "Apt. 556",
+      "city": "Gwenborough",
+      "zipcode": "92998-3874",
+      "geo": {
+        "lat": "-37.3159",
+        "lng": "81.1496"
+      }
+    },
+    "phone": "1-770-736-8031 x56442",
+    "website": "hildegard.org",
+    "company": {
+      "name": "Romaguera-Crona",
+      "catchPhrase": "Multi-layered client-server neural-net",
+      "bs": "harness real-time e-markets"
+    }
+}
+
+
 export function UsersProvider({ children }: UsersProviderProps) {
   const [users, setUsers] = useState<UserType[]>([])
-
 
   useEffect(() => {
     api.get('/users')
@@ -46,22 +71,26 @@ export function UsersProvider({ children }: UsersProviderProps) {
     .catch((error) => {
       console.log(error);
     })
-
   }, []);
 
   async function getUser(id: number) {
     try {
       const response = await api.get(`/users/${id}`);
-      console.log(response.data);
-
       const user = response.data;
       return user;
       
     } catch (error) {
       console.log(error);
     }
-  } 
+  }
 
+  function findUser(id: number) {
+    if(!users) {
+      return;
+    }      
+
+    return users.find(user => user.id === id);
+  }
 
   async function createUser(userInputs: UserInputType) {
     try {
@@ -71,7 +100,7 @@ export function UsersProvider({ children }: UsersProviderProps) {
   };
 
   return (
-    <UsersContext.Provider value={{users, createUser, getUser}}>
+    <UsersContext.Provider value={{users, createUser, getUser, findUser}}>
       { children }
     </UsersContext.Provider>
   )
