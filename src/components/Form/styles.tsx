@@ -41,8 +41,11 @@ export const InputContainer = styled.View`
   margin-bottom: 16px ;
 `;
 
+type TextInputProps = {
+  isEmpty: boolean;
+}
 
-export const TextInput = styled.TextInput`
+export const TextInput = styled.TextInput<TextInputProps>`
   height: 50px;
   width: 100%;
   padding: 12px;
@@ -50,13 +53,13 @@ export const TextInput = styled.TextInput`
 
   border-radius: 4px ;
   border-width: 1px;
-  border-color: ${theme.colors.stroke};
+  border-color: ${({isEmpty}) => isEmpty? 'red': theme.colors.stroke };
   
   color: ${theme.colors.text_primary};
   font-family: ${theme.fonts.regular};
 `;
 
-export const InputBody = styled.TextInput`
+export const InputBody = styled.TextInput<TextInputProps>`
   height: 112px;
   width: 100%;
   padding: 12px;
@@ -64,7 +67,7 @@ export const InputBody = styled.TextInput`
 
   border-radius: 4px ;
   border-width: 1px;
-  border-color: ${theme.colors.stroke};
+  border-color: ${({isEmpty}) => isEmpty? 'red': theme.colors.stroke };
  
   
   color: ${theme.colors.text_primary};

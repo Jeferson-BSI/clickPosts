@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { X } from 'phosphor-react-native';
-
 import { PostType, usePosts } from '../../hooks/usePosts';
 import { theme } from '../../theme';
 import { Button } from '../Button'
@@ -26,46 +25,61 @@ type PostInputsType = {
   title: string;
   body: string;
 }
+type InputErrorType = 'title' | 'body' | 'username' | 'default'| '';
 
 export function Form({ onModalClose, post }: FormProps) {
   const [username, setUsername] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
+  const [inputError, setInputError] = useState<InputErrorType>('');
 
   const [isSendingPost, setIsSendingPost] = useState(false);
 
   const { createPost, editPost } = usePosts();
 
+  const validateInputs = async () => {
+    !username? setInputError('username')
+    :!title? setInputError('title')
+    :!body? setInputError('body')
+    :setInputError('default')
+  }
+
+  const validateInputsEdit = async () => {
+    !title? setInputError('title')
+    :!body? setInputError('body')
+    :setInputError('default')
+  }
+
   async function handleCreateNewPost(){
-    if(isSendingPost || !username ||!title || !body){
+    await validateInputs();
+    
+    if(isSendingPost ||!title || !body || !username){
       return;
     }
 
     setIsSendingPost(true);
-
     const data: PostInputsType = {
       username,
       title,
       body
     }
-
     try {
       await createPost(data);
-      // onModalClose();
-
       setUsername('');
       setTitle('');
       setBody('');
+      setIsSendingPost(false);
+      onModalClose();
       
     } catch (error) {
       setIsSendingPost(false);
       console.log(error);
     }
-
-    setIsSendingPost(false);
   }
 
   async function handleEditPost() {
+    await validateInputsEdit();
+
     if(isSendingPost ||!title || !body || !post){
       return;
     }
@@ -108,6 +122,7 @@ export function Form({ onModalClose, post }: FormProps) {
       <InputContainer>
         {
           !post && <TextInput 
+            isEmpty={inputError === 'username'}
           autoCorrect={false}
           spellCheck={false}
           placeholder="UserName"
@@ -120,6 +135,7 @@ export function Form({ onModalClose, post }: FormProps) {
        
 
         <TextInput 
+          isEmpty={inputError === 'title'}
           autoCorrect={false}
           placeholder="Title"
           placeholderTextColor={theme.colors.text_secondary}
@@ -129,6 +145,7 @@ export function Form({ onModalClose, post }: FormProps) {
         />
         
         <InputBody 
+          isEmpty={inputError === 'body'}
           autoCorrect={false}
           multiline
           placeholder="Write your Body. It can be long, or short. Depends on what you have to say."

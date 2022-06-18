@@ -2,6 +2,7 @@ import { NotePencil, Trash } from 'phosphor-react-native';
 import { compareDateToDateNow } from '../../utils/dateProvider';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParams } from '../../routes/stackRouter';
 
 import { theme } from '../../theme';
 import { 
@@ -17,7 +18,6 @@ import {
   Clickable,
   Line
 } from './styles';
-import { RootStackParams } from '../../routes/stackRouter';
 
 
 export type PostType = {
@@ -72,7 +72,7 @@ export function PostCard({
 
       <Content>
         <Title>{post.title}</Title>
-        <Body>{post.body}</Body>
+        <Body>{post.body.replace(/\n/gi, ' ')}</Body>
       </Content>
 
       <Line />

@@ -32,6 +32,7 @@ export function Profile() {
   const userId  = route?.params?.userId;  
   
   const [user, setUser] = useState<UserType>({} as UserType);
+
   const { getUser } = useUsers();
 
   useEffect(() => {
@@ -58,7 +59,7 @@ export function Profile() {
       <Image 
           resizeMethod="scale"
           source={{
-          uri: `https://source.unsplash.com/random/?person`,
+          uri: `https://i.pravatar.cc/150?img=${user.id}`,
         }}
       />
       <ContainerUser>

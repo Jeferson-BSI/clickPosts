@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { useUsers } from '../../hooks/UseUsers';
 import { PostType, usePosts } from '../../hooks/usePosts';
@@ -12,33 +12,17 @@ import { ConfirmationModal } from '../../components/ConfirmationModal';
 
 import { theme } from '../../theme';
 import { Container, ScrollList , IsLoading} from './styles';
+import { compareTwoDate } from '../../utils/dateProvider';
 
 export function Home() {
   const { posts, isLoading, deletePost } = usePosts();
-  const { users } = useUsers();
 
-  const [ postsWithUsername, setPostsWithUsername ] = useState<PostType[]>([]);
   const [selectedPost, setSelectedPost] = useState<PostType>({} as PostType);
+  const [sortedPosts, setSortedPosts] = useState<PostType[]>([]);
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
-
-  function handlePostsName() {    
-    const postsWithUsername =  posts.map((post) => {
-      const user = users.find(user => user.id === post.userId)
-
-      if(post.username || !user) {        
-        return post;
-      }
-
-      return {
-        ...post,
-        username: user.username,
-      };
-    });
-
-    return postsWithUsername;
-  }
 
   function getPostToDelete(post:PostType) {
       setSelectedPost(post);
@@ -67,10 +51,23 @@ export function Home() {
     setSelectedPost({} as PostType);
   }
 
+  function handleOrderPosts() {
+    const postOrder = [...posts];
+
+    postOrder.sort((a, b) => {
+      if (!a.createdAt) {
+        return -1;
+      }
+      if (!b.createdAt) {
+        return 1;
+      }
+      return compareTwoDate(b.createdAt, a.createdAt);
+    })    
+    setSortedPosts(postOrder);
+  }
   useEffect(() => {
-    const postsWithUsername = handlePostsName();
-    setPostsWithUsername(postsWithUsername)
-  }, [posts, users])
+      handleOrderPosts();
+  }, [posts])
 
 
   return(
@@ -84,7 +81,7 @@ export function Home() {
           />
         :
           <ScrollList 
-            data={postsWithUsername}
+            data={sortedPosts}
             showsVerticalScrollIndicator={false}
             keyExtractor={(_, key) => String(key)}
             renderItem={({item, index}) => (
