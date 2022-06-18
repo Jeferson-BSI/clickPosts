@@ -1,5 +1,7 @@
 import { NotePencil, Trash } from 'phosphor-react-native';
 import { compareDateToDateNow } from '../../utils/dateProvider';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { theme } from '../../theme';
 import { 
@@ -15,6 +17,7 @@ import {
   Clickable,
   Line
 } from './styles';
+import { RootStackParams } from '../../routes/stackRouter';
 
 
 export type PostType = {
@@ -39,17 +42,24 @@ export function PostCard({
   onEditPost, 
   onOpenModal 
 }: PostCardProps) {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
 
   function handleDate(date: string): string {
-    console.log(post);
     return compareDateToDateNow(date);
+  }
+
+  function navigationToProfile() {
+    const { userId } = post;
+    navigation.navigate('Profile', {userId})
   }
 
 
   return(
     <Container>
       <HeaderCard>
-        <UserContainer>
+        <UserContainer
+          onPress={navigationToProfile}
+        >
           <TextName>{ post.username }</TextName>
         </UserContainer>
         <Time>• há {

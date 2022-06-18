@@ -10,7 +10,11 @@ type EditPostProps = {
   post: PostType;
 }
 
-export default function EditPost({ bottomSheetRef, onHandleClose, post }: EditPostProps) {
+export default function EditPost({ 
+  bottomSheetRef, 
+  onHandleClose, 
+  post,
+}: EditPostProps) {
 
   //  function handleClose() {
   //   bottomSheetRef.current?.expand()

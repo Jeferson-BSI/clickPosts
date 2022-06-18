@@ -1,11 +1,18 @@
 import { DotsThreeVertical } from 'phosphor-react-native';
+import { ReactNode } from 'react';
 import { Container, Title, TitleContainer, Clickable } from './styles';
 
-export function Header() {
+type HeaderPros = {
+  title: string;
+  children?: ReactNode;
+}
+
+export function Header({ title, children }: HeaderPros) {
   return(
     <Container>
+      {children}
       <TitleContainer>
-        <Title>ClickPost</Title>
+        <Title>{title}</Title>
       </TitleContainer>
       
       <Clickable>

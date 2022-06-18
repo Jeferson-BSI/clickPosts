@@ -2,26 +2,29 @@ import { createContext, ReactNode, useContext, useEffect, useState } from 'react
 import { api } from '../services/api';
 
 export type UserType = {
-  id: number,
-  name: string,
-  username: string,
-  email: string,
-  address: {
-    street: string,
-    suite: string,
-    city: string,
-    zipcode: string,
-  }
-  phone: string,
-  website: string,
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+  website: string;
+  address?: {
+      "street": string;
+      "suite": string;
+      "city": string;
+      "zipcode": string;
+    };
+  company?: {
+    name: string;
+  };
 }
 
 type UserInputType = UserType;
 
 type CreateContextType = {
-  users: UserType[],
+  users: UserType[];
   createUser: (user: UserInputType) => Promise<void>;
-  getUser: (id: number) => Promise<UserType>;
+  getUser: (id: number) => Promise<UserType | undefined>;
   findUser: (id: number) => UserType | void;
 }
 
@@ -75,10 +78,9 @@ export function UsersProvider({ children }: UsersProviderProps) {
 
   async function getUser(id: number) {
     try {
-      const response = await api.get(`/users/${id}`);
-      const user = response.data;
+      const response = await api.get<UserType>(`/users/${id}`);
+      const user = response.data;  
       return user;
-      
     } catch (error) {
       console.log(error);
     }
@@ -88,7 +90,6 @@ export function UsersProvider({ children }: UsersProviderProps) {
     if(!users) {
       return;
     }      
-
     return users.find(user => user.id === id);
   }
 

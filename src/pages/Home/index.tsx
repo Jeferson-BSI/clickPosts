@@ -3,7 +3,6 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import { useUsers } from '../../hooks/UseUsers';
 import { PostType, usePosts } from '../../hooks/usePosts';
 
-
 import { PostCard } from '../../components/PostCard';
 import { Header } from '../../components/Header';
 import NewPost from '../../components/NewPost';
@@ -45,7 +44,7 @@ export function Home() {
       setSelectedPost(post);
   }
 
-  function getPostToEdit(post:PostType) {
+  function getPostToEdit(post: PostType) {
     setSelectedPost(post);
     bottomSheetRef.current?.expand();
   }
@@ -65,6 +64,7 @@ export function Home() {
 
    function handleClose() {
     bottomSheetRef.current?.close()
+    setSelectedPost({} as PostType);
   }
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export function Home() {
 
   return(
     <Container>
-      <Header />
+      <Header title='ClickPost'/>
       { 
         isLoading?
           <IsLoading 
@@ -103,7 +103,9 @@ export function Home() {
       <NewPost />
       <EditPost 
         bottomSheetRef={bottomSheetRef} 
-        onHandleClose={handleClose} post={selectedPost}/>
+        onHandleClose={handleClose} 
+        post={selectedPost} 
+        />
 
       <ConfirmationModal 
         title='Are you sure?'
