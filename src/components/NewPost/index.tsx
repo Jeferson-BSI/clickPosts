@@ -1,21 +1,20 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { BottomSheetComponent } from '../BottomSheetComponent';
 
 import { Form } from '../Form';
 import { Plus } from 'phosphor-react-native';
-import { theme } from '../../theme';
 
 import { 
   Container, 
-  BottomSheetContainer, 
-  modal, 
-  indicator  
 } from './styles';
+import { ThemeContext } from 'styled-components';
 
 
 
 export default function NewPost() {
+  const { colors } = useContext(ThemeContext);
+
   const bottomSheetRef = useRef<BottomSheet>(null);
 
  function handleOpen() {
@@ -35,7 +34,7 @@ export default function NewPost() {
         <Plus 
           weight='bold'
           size={25}
-          color={theme.colors.white}
+          color={colors.white}
         />
       </Container>
 
@@ -44,15 +43,6 @@ export default function NewPost() {
       >
         <Form onModalClose={handleClose}/>
       </BottomSheetComponent>
-      {/* <BottomSheetContainer
-        ref={bottomSheetRef}
-        snapPoints={[1, '60%']} 
-        backgroundStyle={modal}
-        handleIndicatorStyle={indicator}
-        enableContentPanningGesture
-      >
-        <Form onModalClose={handleClose}/>
-      </BottomSheetContainer> */}
     </>
   );
 }

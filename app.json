@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#8257E5"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,9 +23,16 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "backgroundColor": "#8257E5"
+      },
+      "package": "com.jefersonsi.clickPosts",
+      "permissions": [
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE",
+        "READ_INTERNAL_STORAGE"
+      ]
     },
+
     "web": {
       "favicon": "./assets/favicon.png"
     }

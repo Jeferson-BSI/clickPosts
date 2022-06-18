@@ -11,7 +11,7 @@ export const Container = styled.View`
   padding: 0 8px;
 
   border-bottom-width: 1px;
-  border-color: #9c9c9c;
+  border-color: ${props => props.theme.colors.border};
 `;
 export const TitleContainer = styled.View`
   flex: 1; 
@@ -23,8 +23,9 @@ export const TitleContainer = styled.View`
 export const Title = styled.Text`
   font-size: 20px;
   font-family: ${theme.fonts.bold};
-  color: ${theme.colors.blue};
+  color: ${props => props.theme.colors.textTitleHeader};
 `;
 
 
-export const Clickable = styled.TouchableOpacity``;
+export const Clickable = styled.TouchableOpacity`
+`;

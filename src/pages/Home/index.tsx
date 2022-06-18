@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { useUsers } from '../../hooks/UseUsers';
 import { PostType, usePosts } from '../../hooks/usePosts';
 
 import { PostCard } from '../../components/PostCard';
@@ -10,15 +9,26 @@ import EditPost from '../../components/EditPost';
 
 import { ConfirmationModal } from '../../components/ConfirmationModal';
 
-import { theme } from '../../theme';
-import { Container, ScrollList , IsLoading} from './styles';
 import { compareTwoDate } from '../../utils/dateProvider';
 
+import { 
+  Container, 
+  ScrollList , 
+  IsLoading,   
+
+} from './styles';
+import { SelectedThemeMode } from '../../components/SelectedThemeMode';
+import { ThemeContext } from 'styled-components';
+
 export function Home() {
+  const { colors } = useContext(ThemeContext);
+
   const { posts, isLoading, deletePost } = usePosts();
 
   const [selectedPost, setSelectedPost] = useState<PostType>({} as PostType);
   const [sortedPosts, setSortedPosts] = useState<PostType[]>([]);
+  const [isOpenOptionMode, setIsOpenOptionMode] = useState(false);
+
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -42,11 +52,11 @@ export function Home() {
     setModalIsOpen(true);
   }
 
-   function handleCloseModal(){
+  function handleCloseModal(){
     setModalIsOpen(false);
   }
 
-   function handleClose() {
+  function handleClose() {
     bottomSheetRef.current?.close()
     setSelectedPost({} as PostType);
   }
@@ -65,19 +75,27 @@ export function Home() {
     })    
     setSortedPosts(postOrder);
   }
+
   useEffect(() => {
       handleOrderPosts();
   }, [posts])
 
+  function handleCloseOptionMode(){
+    setIsOpenOptionMode(false);
+  }
+
+  function handleOpenOptionMode(){
+    setIsOpenOptionMode(true);
+  }
 
   return(
     <Container>
-      <Header title='ClickPost'/>
+      <Header title='ClickPost' onOpenOptionsMode={handleOpenOptionMode} />
       { 
         isLoading?
           <IsLoading 
             size={50}
-            color={theme.colors.brand}
+            color={colors.brand}
           />
         :
           <ScrollList 
@@ -111,6 +129,14 @@ export function Home() {
         onClickOK={handleDeletePost}
         isVisible={modalIsOpen}
       />
+
+      { isOpenOptionMode &&
+        <SelectedThemeMode 
+          dark='Dark' 
+          light='Light' 
+          onCloseOptionsMode={handleCloseOptionMode}
+        />
+      }
     </Container>
   )
 };

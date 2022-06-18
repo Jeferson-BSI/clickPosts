@@ -1,6 +1,7 @@
+import { useContext } from "react";
 import { ActivityIndicator, TouchableOpacityProps } from "react-native";
+import { ThemeContext } from "styled-components";
 
-import { theme } from "../../theme";
 import { Container, TextButton } from './styles';
 
 interface ButtonProps extends TouchableOpacityProps{
@@ -9,6 +10,7 @@ interface ButtonProps extends TouchableOpacityProps{
 }
 
 export function Button({isLoading, title, onPress}: ButtonProps) {
+  const { colors } = useContext(ThemeContext);
   return (
     <Container
       onPress={onPress}
@@ -16,7 +18,7 @@ export function Button({isLoading, title, onPress}: ButtonProps) {
       {
         isLoading? 
           <ActivityIndicator 
-            color={theme.colors.text_on_brand_color}
+            color={colors.text_on_brand_color}
           />
         :
           <TextButton>

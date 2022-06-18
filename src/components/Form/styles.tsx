@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { theme } from '../../theme';
 
 export const Container = styled.View`
   padding: 0px 24px;
@@ -15,23 +14,19 @@ export const HeaderFrom = styled.TouchableOpacity`
 
 export const BackButton = styled.TouchableOpacity``;
 
-
 export const TitleContainer = styled.View`
-  /* margin: 18px 0px; */
   flex-direction: row;
   justify-content: center;
   align-items: center;
 `;
 
-
 export const Title = styled.Text`
   font-size: 20px;
-  font-family: ${theme.fonts.medium};
-  color: ${theme.colors.textTitle};
+  font-family: ${props => props.theme.fonts.medium};
+  color: ${props => props.theme.colors.titleModal};
   margin-top: 18px;
   margin-bottom: 20px;
 `;
-
 
 export const InputContainer = styled.View`
   width: 100%;
@@ -41,7 +36,7 @@ export const InputContainer = styled.View`
   margin-bottom: 16px ;
 `;
 
-type TextInputProps = {
+interface TextInputProps {
   isEmpty: boolean;
 }
 
@@ -53,10 +48,10 @@ export const TextInput = styled.TextInput<TextInputProps>`
 
   border-radius: 4px ;
   border-width: 1px;
-  border-color: ${({isEmpty}) => isEmpty? 'red': theme.colors.stroke };
+  border-color: ${({isEmpty}) => isEmpty? 'red':  props => props.theme.colors.stroke};
   
-  color: ${theme.colors.text_primary};
-  font-family: ${theme.fonts.regular};
+  color: ${ props => props.theme.colors.textInput};
+  font-family: ${props => props.theme.fonts.regular};
 `;
 
 export const InputBody = styled.TextInput<TextInputProps>`
@@ -67,11 +62,11 @@ export const InputBody = styled.TextInput<TextInputProps>`
 
   border-radius: 4px ;
   border-width: 1px;
-  border-color: ${({isEmpty}) => isEmpty? 'red': theme.colors.stroke };
+  border-color: ${({isEmpty}) => isEmpty? 'red': props => props.theme.colors.stroke };
  
   
-  color: ${theme.colors.text_primary};
-  font-family: ${theme.fonts.regular};
+  color: ${ props => props.theme.colors.textInput};
+  font-family: ${props => props.theme.fonts.regular};
 `;
 
 export const Footer = styled.View`

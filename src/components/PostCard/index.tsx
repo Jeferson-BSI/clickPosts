@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParams } from '../../routes/stackRouter';
 
-import { theme } from '../../theme';
 import { 
   Container, 
   HeaderCard, 
@@ -18,6 +17,8 @@ import {
   Clickable,
   Line
 } from './styles';
+import { useContext } from 'react';
+import { ThemeContext } from 'styled-components';
 
 
 export type PostType = {
@@ -44,13 +45,19 @@ export function PostCard({
 }: PostCardProps) {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParams>>();
 
+  const { colors } = useContext(ThemeContext);
+
   function handleDate(date: string): string {
     return compareDateToDateNow(date);
   }
 
   function navigationToProfile() {
-    const { userId } = post;
-    navigation.navigate('Profile', {userId})
+
+    const { userId, username } = post;
+    if (username){
+
+      navigation.navigate('Profile', {userId, username})
+    }
   }
 
 
@@ -85,7 +92,7 @@ export function PostCard({
           <NotePencil 
             weight='thin'
             size={24}
-            color={theme.colors.blueLight}
+            color={colors.icons}
           />
         </Clickable>
 
@@ -98,7 +105,7 @@ export function PostCard({
           <Trash
             weight='thin'
             size={24}
-            color={theme.colors.blueLight}
+            color={colors.icons}
           />
         </Clickable>
       </FooterPost>

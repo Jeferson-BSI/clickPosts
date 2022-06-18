@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { X } from 'phosphor-react-native';
 import { PostType, usePosts } from '../../hooks/usePosts';
-import { theme } from '../../theme';
 import { Button } from '../Button'
 
 import { 
@@ -14,6 +13,7 @@ import {
   InputBody,
   HeaderFrom
  } from './styles';
+import { ThemeContext } from 'styled-components';
 
 type FormProps = {
   onModalClose: () => void;
@@ -28,6 +28,9 @@ type PostInputsType = {
 type InputErrorType = 'title' | 'body' | 'username' | 'default'| '';
 
 export function Form({ onModalClose, post }: FormProps) {
+  const { colors } = useContext(ThemeContext);
+
+
   const [username, setUsername] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
@@ -106,12 +109,19 @@ export function Form({ onModalClose, post }: FormProps) {
     setIsSendingPost(false);
   }
 
+  useEffect(() => {
+    if(post){
+      setTitle(post.title);
+      setBody(post.body);
+    }
+  }, [post])
+
   return (
     <Container>
         <HeaderFrom 
           onPress={onModalClose}
         >
-          <X weight="bold"  />
+          <X weight="bold" color={colors.icons}  />
         </HeaderFrom>
         <TitleContainer>
           <Title>
@@ -122,12 +132,12 @@ export function Form({ onModalClose, post }: FormProps) {
       <InputContainer>
         {
           !post && <TextInput 
-            isEmpty={inputError === 'username'}
+          isEmpty={inputError === 'username'}
           autoCorrect={false}
           spellCheck={false}
           placeholder="UserName"
-          placeholderTextColor={theme.colors.text_secondary}
-          selectionColor={theme.colors.brand}
+          placeholderTextColor={colors.text_secondary}
+          selectionColor={colors.brand}
           value={username}
           onChangeText={(value) => setUsername(value)}
         />
@@ -138,8 +148,8 @@ export function Form({ onModalClose, post }: FormProps) {
           isEmpty={inputError === 'title'}
           autoCorrect={false}
           placeholder="Title"
-          placeholderTextColor={theme.colors.text_secondary}
-          selectionColor={theme.colors.brand}
+          placeholderTextColor={colors.text_secondary}
+          selectionColor={colors.brand}
           value={title}
           onChangeText={(value) => setTitle(value)}
         />
@@ -149,8 +159,8 @@ export function Form({ onModalClose, post }: FormProps) {
           autoCorrect={false}
           multiline
           placeholder="Write your Body. It can be long, or short. Depends on what you have to say."
-          placeholderTextColor={theme.colors.text_secondary}
-          selectionColor={theme.colors.brand}
+          placeholderTextColor={colors.text_secondary}
+          selectionColor={colors.brand}
 
           value={body}
           onChangeText={(value) => setBody(value)}
@@ -159,7 +169,7 @@ export function Form({ onModalClose, post }: FormProps) {
 
       <Footer>
         <Button 
-          title={post? 'Editar': 'Enviar'}
+          title={post? 'Edit': 'Send'}
           isLoading={isSendingPost}
           onPress={post? handleEditPost :handleCreateNewPost}
         />

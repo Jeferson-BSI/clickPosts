@@ -1,6 +1,6 @@
 import BottomSheet from '@gorhom/bottom-sheet';
-import { PostType } from '../../hooks/usePosts';
 import { BottomSheetComponent } from '../BottomSheetComponent';
+import { PostType } from '../../hooks/usePosts';
 
 import { Form } from '../Form';
 
@@ -16,13 +16,7 @@ export default function EditPost({
   post,
 }: EditPostProps) {
 
-  //  function handleClose() {
-  //   bottomSheetRef.current?.expand()
-  // }
-
   return (
-
-
       <BottomSheetComponent
         bottomSheetRef={bottomSheetRef}
       >

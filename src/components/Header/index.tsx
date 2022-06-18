@@ -1,13 +1,24 @@
 import { DotsThreeVertical } from 'phosphor-react-native';
-import { ReactNode } from 'react';
-import { Container, Title, TitleContainer, Clickable } from './styles';
+import { ReactNode, useContext } from 'react';
+import { ThemeContext } from 'styled-components';
+
+import { 
+  Container, 
+  Title, 
+  TitleContainer, 
+  Clickable,
+
+} from './styles';
 
 type HeaderPros = {
   title: string;
   children?: ReactNode;
+  onOpenOptionsMode: () => void;
 }
 
-export function Header({ title, children }: HeaderPros) {
+export function Header({ title, children, onOpenOptionsMode }: HeaderPros) {
+  const { colors } = useContext(ThemeContext);
+
   return(
     <Container>
       {children}
@@ -15,10 +26,13 @@ export function Header({ title, children }: HeaderPros) {
         <Title>{title}</Title>
       </TitleContainer>
       
-      <Clickable>
+      <Clickable
+        onPress={onOpenOptionsMode}
+      >
         <DotsThreeVertical 
-          size={28}
-          weight="bold" 
+          size={30}
+          weight="bold"
+          color={colors.iconsProfile}
         />
       </Clickable>
     </Container>

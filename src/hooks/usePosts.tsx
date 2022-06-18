@@ -75,10 +75,10 @@ export function PostProvider({ children }: PostsProviderProps) {
     };
   }, []);
 
-
   function findPost(id: number) {
     return posts.find(post => post.id === id);
   }
+
   const RandomInteger = (min: number, max: number) =>(
     Math.floor(Math.random() * (max - min + 1)) + min
   )
@@ -90,15 +90,12 @@ export function PostProvider({ children }: PostsProviderProps) {
         title: postInputs.title,
         body: postInputs.body,
       })
-      
-
       const post = {
         ...response.data,
         username: postInputs.username,
         createdAt: dateNow(),
         id: RandomUserId
       };
-      console.log(post)
 
       setPosts([post, ...posts]);
       savePosts('@PostsReact', post);  
@@ -107,16 +104,12 @@ export function PostProvider({ children }: PostsProviderProps) {
     }
   };
 
-
-  async function editPost(postInputs: PostTypeInput, post: PostType) {
-    console.log(post.userId);
-    
+  async function editPost(postInputs: PostTypeInput, post: PostType) {    
     try {
       const response = await api.patch(`/posts/${post.userId}`, {
         title: postInputs.title,
         body: postInputs.body,
       });
-      
       
       const newPosts = posts.filter(item => {      
         return post.id !== item.id
@@ -132,8 +125,7 @@ export function PostProvider({ children }: PostsProviderProps) {
       await delePost('@PostsReact', post.id)
       await savePosts('@PostsReact', newPost);  
       setPosts([newPost, ...newPosts]);
-           
-
+          
     } catch (error) {
       console.log(error);
     }
@@ -151,7 +143,6 @@ export function PostProvider({ children }: PostsProviderProps) {
     await delePost('@PostsReact', id);
     setPosts([...newPosts]);
   }
-
 
   return (
     <PostsContext.Provider value={{

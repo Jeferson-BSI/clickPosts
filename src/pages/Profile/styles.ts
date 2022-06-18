@@ -1,15 +1,13 @@
 import styled from 'styled-components/native';
-import { theme } from '../../theme';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${theme.colors.background};
+  background-color: ${props => props.theme.colors.background};
 `;
 
 export const HeaderButton = styled.TouchableOpacity`
   width: 46px;
   height: 46px;
-  /* background: ${theme.colors.brand}; */
   border-radius: 23px;
   align-items: center;
   justify-content: center;
@@ -18,7 +16,7 @@ export const HeaderButton = styled.TouchableOpacity`
 export const Banner = styled.View`
   align-items: center;
   justify-content: center;
-  background: ${theme.colors.brand};
+  background: ${props => props.theme.colors.banner};
   width: 100%;
   height: 20%;
   border-bottom-left-radius: 50px;
@@ -47,8 +45,8 @@ export const ContainerUser = styled.View`
 
 export const TextName = styled.Text`
     font-size: 20px;
-    font-family: ${theme.fonts.bold};
-    color: ${theme.colors.stroke};
+    font-family: ${props => props.theme.fonts.bold};
+    color: ${props => props.theme.colors.userTitle};
 `;
 
 export const ContentArea = styled.View`
@@ -66,19 +64,19 @@ export const Info = styled.View`
 
   border-radius: 4px ;
   border-width: 1px;
-  border-color: ${theme.colors.stroke};
+  border-color: ${props => props.theme.colors.stroke};
 `;
 
-type LabelProps = {
+interface LabelProps {
   address?: boolean;
 }
 export const Label = styled.Text<LabelProps>`
   padding: 0 10px ;
   font-size: ${({ address }) => (address? '16px': '18px') };
-  font-family: ${theme.fonts.regular};
-  color: ${theme.colors.black};
+  font-family: ${props => props.theme.fonts.regular};
+  color: ${props => props.theme.colors.label};
   margin-left: 10px;
 
   border-left-width: 1px;
-  border-color: ${theme.colors.stroke};
+  border-color: ${props => props.theme.colors.stroke};
 `;

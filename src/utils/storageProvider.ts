@@ -21,7 +21,7 @@ export async function savePosts(key: string, newPost: PostType) {
   );
 
   if (hasPost) {
-    console.log('já existe');
+    // console.log('já existe');
     return;
   }
 
@@ -38,19 +38,30 @@ export async function delePost(key: string, id: number) {
   const posts = postStored.filter((item: PostType) => item.id !== id);
 
   await AsyncStorage.setItem(key, JSON.stringify(posts));
-  console.log('post deletado');
+  // console.log('post deletado');
 
   return posts;
 }
 
 // Filtrar algum post se já esta salvo
 
-export async function hasMovie(key: string, movie: PostType) {
+export async function hasPost(key: string, id: number) {
   const postStored = await getPostsSaved(key);
 
-  const hasPost = postStored.find((item: PostType) => item.id === movie.id);
+  const hasPost = postStored.find((item: PostType) => item.id === id);
 
-  if (hasPost) return true;
+  if (hasPost) return hasPost;
 
-  return false;
+  return {};
+}
+
+export async function saveUserPreferences(key: string, mode: string) {
+  await AsyncStorage.setItem(key, JSON.stringify(mode));
+}
+
+
+export async function getUserPreferences(key: string) {
+  const themeMode = await AsyncStorage.getItem(key);
+  if (themeMode)
+    return JSON.parse(themeMode);
 }
