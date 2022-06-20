@@ -90,7 +90,7 @@ export function Profile() {
       <Image 
           resizeMethod="scale"
           source={{
-          uri: `https://i.pravatar.cc/150?img=${username?.length}`,
+          uri: `https://i.pravatar.cc/150?img=${user.username}`,
         }}
       />
       <ContainerUser>

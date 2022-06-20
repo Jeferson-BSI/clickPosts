@@ -1,5 +1,4 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { AsyncStorage } from 'react-native';
 import { api } from '../services/api';
 import { getUserPreferences, saveUserPreferences } from '../utils/storageProvider';
 
@@ -20,9 +19,9 @@ export type UserType = {
   };
 }
 
-type UserInputType = UserType;
 
 type modeType = 'dark' | 'light';
+
 type CreateContextType = {
   users: UserType[];
   userPreferences: modeType;
@@ -50,12 +49,14 @@ export function UsersProvider({ children }: UsersProviderProps) {
       
       getUserPreferences("@themeMode")
       .then((response) => {
-        setUserPreferences(response)
+        setUserPreferences(response);
       })
     })
     .catch((error) => {
       console.log(error);
     })
+
+    
   }, []);
 
 
@@ -63,13 +64,11 @@ export function UsersProvider({ children }: UsersProviderProps) {
     try {
       const response = await api.get<UserType>(`/users/${id}`);
       const user = response.data; 
-      // console.log(user);
        
       return user;
     } catch (error) {
       console.log(error);
     }
-
     return;
   }
 
@@ -91,7 +90,8 @@ export function UsersProvider({ children }: UsersProviderProps) {
       handleUserPreferences, 
       userPreferences, 
       getUser, 
-      findUser}}>
+      findUser,
+      }}>
       { children }
     </UsersContext.Provider>
   )
