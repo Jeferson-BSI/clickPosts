@@ -56,7 +56,7 @@ Abra o aplicativo por meio de um emulador ou de um dispositivo físico (que este
 
 ## Telas do Aplicativo
 #### Screen Home
-<div align="center" style="width: 400px; height: 400px; margin-right: 30px">
+<div align="center" style="width: 300px; height: 300px; margin-right: 30px display: flex; flex-direction: row;">
   <img style=" margin-right: 30px" src="./.github/homeLight.jpeg" alt="screen Home mode Dark"
   >
   <img  src="./.github/homeDark.jpeg" alt="screen Home mode Dark"
@@ -65,7 +65,7 @@ Abra o aplicativo por meio de um emulador ou de um dispositivo físico (que este
 
 #
 #### Screen Profile
-<div align="center" style="width: 400px; height: 400px; margin-right: 30px">
+<div align="center" style="width: 300px; height: 300px; margin-right: 30px">
   <img style=" margin-right: 30px" src="./.github/profileLight.jpeg" alt="screen Home mode Dark"
   >
   <img  src="./.github/profileDark.jpeg" alt="screen Home mode Dark"
@@ -74,7 +74,7 @@ Abra o aplicativo por meio de um emulador ou de um dispositivo físico (que este
 
 #
 ####   Criação de Postagens e Edição
-<div align="center" style="width: 400px; height: 400px; margin-right: 30px">
+<div align="center" style="width: 300px; height: 300px; margin-right: 30px">
   <img style=" margin-right: 30px" src="./.github/createLight.jpeg" alt="screen Home mode Dark"
   >
   <img  src="./.github/edit.jpeg" alt="screen Home mode Dark"
@@ -83,7 +83,7 @@ Abra o aplicativo por meio de um emulador ou de um dispositivo físico (que este
 
 #
 ####   Modal de confirmação
-<div align="center" style="width: 400px; height: 400px; margin-right: 30px">
+<div align="center" style="width: 300px; height: 300px; margin-right: 30px">
   <img style=" margin-right: 30px" src="./.github/confirmation.jpeg" alt="screen Home mode Dark"
   >
 </div>
