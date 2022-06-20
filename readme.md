@@ -57,33 +57,33 @@ Abra o aplicativo por meio de um emulador ou de um dispositivo físico (que este
 ## Telas do Aplicativo
 #### Screen Home
 <div align="center" style="width: 300px; height: 300px; margin-right: 30px display: flex; flex-direction: row;">
-  <img style=" margin-right: 30px" src="./.github/homeLight.jpeg" alt="screen Home mode Dark"
+  <img style=" margin-right: 30px" src="./.github/homeLight.png" alt="screen Home mode Dark"
   >
-  <img  src="./.github/homeDark.jpeg" alt="screen Home mode Dark"
+  <img  src="./.github/homeDark.png" alt="screen Home mode Dark"
   />
 </div>
 
 #
 #### Screen Profile
 <div align="center" style="width: 300px; height: 300px; margin-right: 30px">
-  <img style=" margin-right: 30px" src="./.github/profileLight.jpeg" alt="screen Home mode Dark"
+  <img style=" margin-right: 30px" src="./.github/profileLight.png" alt="screen Home mode Dark"
   >
-  <img  src="./.github/profileDark.jpeg" alt="screen Home mode Dark"
+  <img  src="./.github/profileDark.png" alt="screen Home mode Dark"
   />
 </div>
 
 #
 ####   Criação de Postagens e Edição
 <div align="center" style="width: 300px; height: 300px; margin-right: 30px">
-  <img style=" margin-right: 30px" src="./.github/createLight.jpeg" alt="screen Home mode Dark"
+  <img style=" margin-right: 30px" src="./.github/createLight.png" alt="screen Home mode Dark"
   >
-  <img  src="./.github/edit.jpeg" alt="screen Home mode Dark"
+  <img  src="./.github/edit.png" alt="screen Home mode Dark"
   />
 </div>
 
 #
 ####   Modal de confirmação
 <div align="center" style="width: 300px; height: 300px; margin-right: 30px">
-  <img style=" margin-right: 30px" src="./.github/confirmation.jpeg" alt="screen Home mode Dark"
+  <img style=" margin-right: 30px" src="./.github/confirmation.png" alt="screen Home mode Dark"
   >
 </div>
