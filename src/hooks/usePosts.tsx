@@ -45,20 +45,21 @@ export function PostProvider({ children }: PostsProviderProps) {
       
       const { data } = response;
 
-      const postsWhitUserName:PostType[] = [];
-
-      for await (let post of data) {
+      const postsWhitUserName =  await Promise.all( data.map(async (post) => {
+        
         const user = await getUser(post.userId);
         if(user){
-
+          
           const newPost: PostType = {
             ...post,
             username: user.username,
             createdAt: subDate(formatDate('2022/06/12 05:54:32')),
           }
-          postsWhitUserName.push(newPost);
+          return newPost;
         }
-      }
+        return post
+      }))
+      
       setPosts([...postSaved, ...postsWhitUserName]);
       setIsLoading(false);
       

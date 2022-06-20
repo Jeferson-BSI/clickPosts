@@ -7,6 +7,7 @@ import { darkTheme, theme } from '../theme';
 import { Home } from '../pages/Home';
 import { Profile } from '../pages/Profile';
 import { useUsers } from '../hooks/UseUsers';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export type RootStackParams = {
   Home: undefined;
@@ -22,6 +23,13 @@ const Stack = createNativeStackNavigator<RootStackParams>();
 export function Router() {
   const { userPreferences } = useUsers();
   return (
+  <GestureHandlerRootView
+      style={{
+      flex: 1,
+      backgroundColor: theme.colors.background
+    }}
+    >
+    
     <ThemeProvider theme={
       userPreferences=== "dark"?darkTheme
       :theme
@@ -46,5 +54,7 @@ export function Router() {
 
     </Stack.Navigator>
     </ThemeProvider>
+  </GestureHandlerRootView>
+
   );
 };

@@ -32,7 +32,7 @@ export const theme = {
 
       textBody: '#969cb3',
       textTitle: '#363f5f',
-      DotsThreeVertical: '#000000',
+      dotsThreeVertical: '#000000',
 
 
       brand: '#8257E5',
@@ -77,7 +77,8 @@ export const darkTheme = {
       confirmationModalWhite: '#FFFFffc6',
       confirmationModalBody: '#E3E3E3c6',
 
-      
+      dotsThreeVertical: '#000000',
+
       modeBackground: '#27272A',
       modeBorde: '#8257E5',
       modeText: '#FFFFFF',

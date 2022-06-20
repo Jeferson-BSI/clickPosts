@@ -25,7 +25,6 @@ declare module 'styled-components' {
       confirmationModal: string,
       confirmationModalWhite: string,
       confirmationModalBody: string,
-
       
       blue: string;
       blueLight: string;
@@ -46,7 +45,7 @@ declare module 'styled-components' {
       stroke: string;
       border: string;
       line: string;
-      DotsThreeVertical: string;
+      dotsThreeVertical: string;
   },
   
   fonts: {
